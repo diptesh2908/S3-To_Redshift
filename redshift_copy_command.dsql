@@ -1,0 +1,23 @@
+CREATE TABLE video_games (
+    rank BIGINT,                bigint in Parquet maps to BIGINT in Redshift
+    name VARCHAR(255),         -- string in Parquet maps to VARCHAR in Redshift
+    platform VARCHAR(50),      -- string in Parquet maps to VARCHAR in Redshift
+    year BIGINT,               -- bigint in Parquet maps to BIGINT in Redshift
+    genre VARCHAR(50),         -- string in Parquet maps to VARCHAR in Redshift
+    publisher VARCHAR(100),    -- string in Parquet maps to VARCHAR in Redshift
+    na_sales FLOAT8,           -- double in Parquet maps to FLOAT8 in Redshift
+    eu_sales FLOAT8,           -- double in Parquet maps to FLOAT8 in Redshift
+    jp_sales FLOAT8,           -- double in Parquet maps to FLOAT8 in Redshift
+    other_sales FLOAT8,        -- double in Parquet maps to FLOAT8 in Redshift
+    global_sales FLOAT8,       -- double in Parquet maps to FLOAT8 in Redshift
+    ratings FLOAT8             -- double in Parquet maps to FLOAT8 in Redshift
+);
+
+select * from dev.public.video_games ;
+
+
+COPY video_games
+FROM 's3://video-games/source_output/parquet_product/run-AmazonS3_node1734185368563-10-part-block-0-r-00000-snappy.parquet'
+IAM_ROLE 'arn:aws:iam::195275635727:role/service-role/AmazonRedshift-CommandsAccessRole-20241227T130237'
+FORMAT AS PARQUET;
+
