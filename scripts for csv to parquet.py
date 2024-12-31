@@ -8,6 +8,8 @@ from awsgluedq.transforms import EvaluateDataQuality
 from pyspark.sql import functions as f 
 from awsglue.dynamicframe import DynamicFrame 
 import logging
+import os
+
 
 logger = logging.getLogger('my_logger')
 logger.setLevel(logging.INFO)
